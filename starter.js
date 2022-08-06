@@ -4,24 +4,26 @@
 
 // CODE HERE
 const add = (num1 , num2) => num1 + num2;
+
 const substract = (num1 , num2) => num1 - num2;
+
 const multiply = (num1 , num2) => num1 * num2;
+
 const divide = (num1 , num2) => num1 / num2;
 
 const calculator = (num1 , num2 , callback) => {
     if (+num1 && +num2) {
         num1 = +num1;
         num2 = +num2;
-
         return callback(num1 , num2)
     } else {
         console.log("Use #'s mfer")
     }
 };
 
-const result = calculator (3 , 4 , add);
+const result = calculator (1 , 2 , add);
 const otherResult = calculator (3 , 4 , multiply);
-// console.log(result , otherResult);
+console.log(`\n#1.\n calculator returns ${result} , ${otherResult}\n`);
 
 
 
@@ -114,10 +116,10 @@ const applyDiscounts = (arr , callback , discount) => {
     });
 };
 
-// applyDiscounts(dogProducts , applyPercentDiscount , .1);
+applyDiscounts(dogProducts , applyPercentDiscount , .1);
 // console.log(dogProducts);
 
-// applyDiscounts(catProducts , applyFlatRateDiscount , 2);
+applyDiscounts(catProducts , applyFlatRateDiscount , 2);
 // console.log(catProducts);
 
 const applyDiscountsByCategory = (arr , category , callback , discount) => {
@@ -191,10 +193,10 @@ const makeWheatSandwich = makeSandwich('wheat');
 const makeRyeSandwich = makeSandwich('rye');
 
 const sandwich1 = makeWheatSandwich(['pickles' , 'cheese' , 'ham' , 'lettuce']);
-console.log(sandwich1);
+// console.log(sandwich1);
 
 const sandwich2 = makeRyeSandwich(['turkey']);
-console.log(sandwich2);
+// console.log(sandwich2);
 
 
 
@@ -253,38 +255,42 @@ const copyArrToSnakeCase = arr => {
 }
   
 // CODE HERE
-const copyArrAndChange = (arr , cb) => {
-    let result = [];
-    for (let i = 0; i < arr.length; i++) {
-        let newValue = cb (arr[i]);
-        result.push(newValue);
-    }
-    return result;
-}
-
-const copyStrToCamelCase = (str) => {
-    const splitStr = str.split(' ');
-    let camelCaseStr = '';
-    for (let x = 0; x < splitStr.length; x++) {
-        let word = splitStr[x];
-        word = word.toLowerCase();
-        if (x !== 0) {
-            word = word.charAt(0).toUpperCase() + word.slice(1);
-        }
-        camelCaseStr += word;
-    }
-    return camelCaseStr;
-}
 
 
-const copyStrToSnakeCase = (str) => {
-    str = str.toLowerCase();
-    const splitStr = str.split(' ');
-    const snakeCaseStr = splitStr.join('_');
-    return snakeCaseStr;
-}
+// const copyArrAndChange = (arr , cb) => {
+//     let result = [];
+//     for (let i = 0; i < arr.length; i++) {
+//         let newValue = cb (arr[i]);
+//         result.push(newValue);
+//     }
+//     return result;
+// }
 
-console.log(copyStrToCamelCase([lotr]));
+// const copyStrToCamelCase = (str) => {
+//     const splitStr = str.split(' ');
+//     let camelCaseStr = '';
+//     for (let x = 0; x < splitStr.length; x++) {
+//         let word = splitStr[x];
+//         word = word.toLowerCase();
+//         if (x !== 0) {
+//             word = word.charAt(0).toUpperCase() + word.slice(1);
+//         }
+//         camelCaseStr += word;
+//     }
+//     return camelCaseStr;
+// }
+
+
+// const copyStrToSnakeCase = (arr) => {
+//     let newStr = arr.toString
+//     .split(' ')
+//     .join('_')
+// }
+
+
+//keeps throwing error saying that nothing i try, Split, join, aren't functions. couldnt figure it out by looking at solution page
+
+// console.log(copyStrToSnakeCase([lotr]));
 
 
 
@@ -295,7 +301,7 @@ console.log(copyStrToCamelCase([lotr]));
 
 
 //// MAP ////
-
+console.log(`~~~~~ HIGHER ORDER ARRAY METHODS ~~~~~\n`)
 /*
     Pass a callback to map that will return 'pink'
     for each color in the array.
@@ -303,7 +309,9 @@ console.log(copyStrToCamelCase([lotr]));
 
 const colors = ['red', 'blue', 'yellow', 'green', 'orange']
 
-// const mappedColors // = colors.map()
+const mappedColors  = colors.map(() => 'pink')
+
+console.log(`.map\n${mappedColors}`) 
 
 /*
     Edit the formalGreeting function and use the built in .map method 
@@ -315,9 +323,12 @@ const colors = ['red', 'blue', 'yellow', 'green', 'orange']
 
 const formalNames = ['Bernard', 'Elizabeth', 'Conrad', 'Mary Margaret']
 
-const formalGreeting = names => {
-    // CODE HERE
-}
+const formalGreeting = names => names.map(name => `Hello, ${name}`)
+
+
+const greetings = formalGreeting(formalNames)
+
+console.log(`${greetings} \n`)
 
 // Call formalGreeting passing in the formalNames array
 
@@ -331,9 +342,9 @@ const formalGreeting = names => {
 
 const places = ['Binghampton', 'Albany', 'New York', 'Ithaca', 'Auburn', 'Rochester', 'Buffalo']
 
-// const placesThatStartWithA // = places.filter()
+ const placesThatStartWithA  = places.filter(word => word.startsWith('A'))
 
-
+console.log(`.filter\n${placesThatStartWithA}`)
 /*
     Create a function called identifier that uses the filter higher order 
     array method to filter over the provided jobs array of objects
@@ -357,9 +368,17 @@ let jobs = [
 // Do not edit the code above.
 
 // CODE HERE
+const identifier = arr => {
+    const fho = arr.filter(word => word.programmer)
+    return fho
+}
+
+
 
 // call the function passing in the jobs array
 
+const person = identifier(jobs)
+console.log(person)
 
 //// REDUCE ////
 
@@ -374,11 +393,13 @@ let jobs = [
 const numsToReduce = [43, 7, 24, 79, 290]
 
 const productOfArray = numbers => {
-    // Code here
+    const allNums = numbers.reduce((acc , num) => acc + num)
+    return allNums
 }
 
 // CODE HERE
-
+const sumArray = productOfArray(numsToReduce)
+console.log(`\n.reduce \n${sumArray}`)
 
 // call productOfArray passing in numsToReduce
 
@@ -409,4 +430,6 @@ const expenses = [
     }
 ]
 
-// const remaining // = expenses.reduce(//callback, //initial value)
+const remaining  = expenses.reduce((acc , num) => acc - num.amount , budget)
+
+console.log(remaining)
